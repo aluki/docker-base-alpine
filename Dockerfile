@@ -4,6 +4,6 @@ FROM ${FROM_IMAGE}:${FROM_VERSION}
 
 RUN adduser -u 1000 -h /home/user -D user
 
-USER user
+USER 1000
 WORKDIR /home/user
 
