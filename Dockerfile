@@ -2,14 +2,8 @@ ARG FROM_IMAGE
 ARG FROM_VERSION
 FROM ${FROM_IMAGE}:${FROM_VERSION}
 
-ENV CONTAINER_BASE_DIR /container.d
-ENV CONTAINER_RUN ${CONTAINER_BASE_DIR}/run
-ENV CONTAINER_COMMANDS_DIR ${CONTAINER_BASE_DIR}/commands
-ENV CONTAINER_CONFIG_DIR ${CONTAINER_BASE_DIR}/config 
+RUN adduser -u 1000 -h /home/user -D user
 
-COPY entrypoint.sh /entrypoint.sh
-COPY run.sh ${CONTAINER_COMMANDS_DIR}/run
-COPY console.sh ${CONTAINER_COMMANDS_DIR}/console
-RUN chmod +x /entrypoint.sh ${CONTAINER_COMMANDS_DIR}/run ${CONTAINER_COMMANDS_DIR}/console
+USER user
+WORKDIR /home/user
 
-ENTRYPOINT [ "/entrypoint.sh" ]
